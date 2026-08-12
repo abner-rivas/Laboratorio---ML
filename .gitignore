@@ -1,0 +1,78 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb~
+
+# Entornos virtuales
+.venv/
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# Herramientas locales
+.codex/
+.agents/
+.codebase-memory/
+codebasememory/
+
+# Cachés
+.pytest_cache/
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Modelos y pesos (demasiado grandes)
+*.safetensors
+pytorch_model.bin
+*.bin
+*.pt
+
+# Datos temporales
+temp/
+tmp/
+backups/
+*.tmp
+*.temp
+*.bak
+
+# Sistema
+.DS_Store
+Thumbs.db
+
+# Archivos locales de configuración
+.local/
