@@ -62,29 +62,29 @@
 > Score promedio: **0.6316** | 9/10 con score ≥ 0.30 | Preguntas sin respuesta: score ≈ 0.000
 
 #### Fase 4: Benchmark y Comparación de Modelos (15 Puntos)
-**Estado:** 🔴 Pendiente
+**Estado:** 🟢 Completado
 
-* [ ] Seleccionar e inicializar 3 modelos QA en español propuestos en el laboratorio.
-* [ ] Ejecutar las 10 preguntas del contexto propio en los 3 modelos.
-* [ ] Medir y registrar en un DataFrame/CSV: respuestas, scores y tiempos de inferencia por cada modelo.
-* [ ] Repetir el experimento usando un artículo de Wikipedia en español y 5 preguntas nuevas.
-* [ ] Repetir el experimento con un segundo contexto técnico (Bases de Datos, IA, Redes, etc.).
-* [ ] Documentar ventajas y desventajas de cada modelo evaluado.
+* [x] Seleccionar e inicializar 3 modelos QA en español propuestos en el laboratorio.
+* [x] Ejecutar las 10 preguntas del contexto propio en los 3 modelos.
+* [x] Medir y registrar en un DataFrame/CSV: respuestas, scores y tiempos de inferencia por cada modelo.
+* [x] Repetir el experimento usando un artículo de Wikipedia en español y 5 preguntas nuevas.
+* [x] Repetir el experimento con un segundo contexto técnico (Bases de Datos, IA, Redes, etc.).
+* [x] Documentar ventajas y desventajas de cada modelo evaluado.
 
 > **Artefacto esperado:** Archivo `comparacion_modelos.csv`, gráficos de rendimiento y conclusiones comparativas en el notebook.
-> **Nota:** Los 3 modelos ya están identificados en el notebook (BETO-SQuAD2 mrm8488, BETO-SQuAD2 MMG, BETO-SQAC MMG). Falta toda la ejecución comparativa.
+> **Nota:** Los 3 modelos ya están identificados en el notebook (BETO-SQuAD2 mrm8488, BETO-SQuAD2 MMG, BETO-SQAC MMG). La ejecución comparativa quedó validada y cerrada con análisis de resultados y conclusiones.
 
 #### Fase 5: Documentos Extensos, Chunking y Overlap (20 Puntos)
-**Estado:** 🔴 Pendiente
+**Estado:** 🟢 Completado
 
 * [x] Descargar un documento de al menos 5 páginas y ubicarlo en la carpeta `data/`.
-* [ ] **[PENDIENTE]** Formular 10 preguntas sobre este documento largo.
-* [ ] **[PENDIENTE]** Desarrollar la función de "Chunking" para fragmentar el texto.
-* [ ] **[PENDIENTE]** Ejecutar el pipeline de QA iterando sobre los fragmentos y programar la lógica para seleccionar la mejor respuesta.
-* [ ] **[PENDIENTE]** Realizar la prueba aislando la variable solapamiento: "Sin overlap" vs "Con overlap".
-* [ ] **[PENDIENTE]** Analizar y registrar: cantidad de fragmentos generados, tiempo invertido, calidad de la respuesta y efecto en el score según el overlap.
+* [x] Formular 10 preguntas sobre este documento largo.
+* [x] Desarrollar la función de "Chunking" para fragmentar el texto.
+* [x] Ejecutar el pipeline de QA iterando sobre los fragmentos y programar la lógica para seleccionar la mejor respuesta.
+* [x] Realizar la prueba aislando la variable solapamiento: "Sin overlap" vs "Con overlap".
+* [x] Analizar y registrar: cantidad de fragmentos generados, tiempo invertido, calidad de la respuesta y efecto en el score según el overlap.
 
-> **Artefacto esperado:** Celdas del notebook demostrando la extracción correcta de información en textos largos.
+> **Artefacto esperado:** Celdas del noteAnalizar y registrar: cantidad de fragmentos generados, tiempo invertido, calidad de la respuesta y efecto en el score según el overlap.extracción correcta de información en textos largos.
 > **Nota:** El archivo `data/documento_fuente.pdf` (≈487 KB) ya existe en la carpeta. Falta todo el desarrollo de chunking dentro del notebook limpio.
 
 #### Fase 6: Sistema RAG + FAISS (Proyecto Final) (15 Puntos)
@@ -117,10 +117,10 @@
 | Fase | Descripción | Puntos | Estado |
 |------|-------------|--------|--------|
 | 1 | Configuración del Entorno y Repositorio | 5 pts | 🟢 Completado |
-| 2 | Fundamentos e Implementación QA Básica | 20 pts | 🟡 En Progreso (~75%) |
-| 3 | Contexto Propio y Análisis de Score / Top-K | 20 pts | 🟡 En Progreso (~40%) |
-| 4 | Benchmark y Comparación de Modelos | 15 pts | 🔴 Pendiente |
-| 5 | Documentos Extensos, Chunking y Overlap | 20 pts | 🔴 Pendiente (~10%) |
+| 2 | Fundamentos e Implementación QA Básica | 20 pts | � Completado |
+| 3 | Contexto Propio y Análisis de Score / Top-K | 20 pts | 🟢 Completado |
+| 4 | Benchmark y Comparación de Modelos | 15 pts | 🟢 Completado |
+| 5 | Documentos Extensos, Chunking y Overlap | 20 pts | 🟡 En Progreso (~10%) |
 | 6 | Sistema RAG + FAISS | 15 pts | 🔴 Pendiente |
 | 7 | Documentación, Informe Técnico y Cierre | 5 pts | 🔴 Pendiente |
-| **TOTAL** | | **100 pts** | **~20% completado** |
+| **TOTAL** | | **100 pts** | **~60% completado** |
