@@ -1,0 +1,15 @@
+metrica,valor
+Document Recall@1,0.6875
+Chunk Recall@1,0.25
+Document Recall@3,0.875
+Chunk Recall@3,0.3125
+Document Recall@5,0.9375
+Chunk Recall@5,0.4375
+Document Recall@10,0.9375
+Chunk Recall@10,0.5625
+Document Accuracy@1,0.6875
+MRR documento,0.7833333333333333
+MRR chunk,0.31875
+QA Accuracy,0.2222222222222222
+QA Accuracy respondibles,0.25
+Abstención correcta sin respuesta,0.0

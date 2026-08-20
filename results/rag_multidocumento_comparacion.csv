@@ -1,0 +1,3 @@
+sistema,documentos,paginas,chunks,vectores,dimension,top_k,recall_at_10,qa_accuracy,preguntas,seleccion_documental,metadata,nota_comparabilidad
+RAG monodocumento,1,62,217,217,768,10,0.6,0.6,10,No aplica,Página + chunk,Conjunto original de 10 preguntas
+RAG multidocumento,9,199,765,765,768,10,0.5625,0.25,18,Sí,Documento + página + chunk,16 preguntas respondibles y 2 sin respuesta; comparación descriptiva

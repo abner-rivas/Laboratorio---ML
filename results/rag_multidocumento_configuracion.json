@@ -1,0 +1,50 @@
+{
+  "fecha_ejecucion_utc": "2026-08-19T21:34:27.832307+00:00",
+  "semilla": 42,
+  "modelo_qa": "MMG/bert-base-spanish-wwm-cased-finetuned-sqac",
+  "modelo_embeddings": "sentence-transformers/paraphrase-multilingual-mpnet-base-v2",
+  "chunk_size": 800,
+  "overlap": 0,
+  "top_k_qa": 10,
+  "valores_k_recuperacion": [
+    1,
+    3,
+    5,
+    10
+  ],
+  "dispositivo": "cuda",
+  "corpus": {
+    "documentos": 9,
+    "paginas": 199,
+    "paginas_con_texto": 199,
+    "caracteres": 608405,
+    "palabras_aproximadas": 94263,
+    "chunks": 765
+  },
+  "indice": {
+    "tipo_indice": "IndexFlatIP",
+    "numero_vectores": 765,
+    "dimension": 768,
+    "tiempo_embeddings_s": 6.147458651001216,
+    "tiempo_indice_s": 0.00025355499747092836,
+    "memoria_embeddings_bytes": 2350080
+  },
+  "metricas": {
+    "Document Recall@1": 0.6875,
+    "Chunk Recall@1": 0.25,
+    "Document Recall@3": 0.875,
+    "Chunk Recall@3": 0.3125,
+    "Document Recall@5": 0.9375,
+    "Chunk Recall@5": 0.4375,
+    "Document Recall@10": 0.9375,
+    "Chunk Recall@10": 0.5625,
+    "Document Accuracy@1": 0.6875,
+    "MRR documento": 0.7833333333333333,
+    "MRR chunk": 0.31875,
+    "QA Accuracy": 0.2222222222222222,
+    "QA Accuracy respondibles": 0.25,
+    "Abstención correcta sin respuesta": 0.0
+  },
+  "version_python": "3.12.3 (main, Jun 19 2026, 12:46:00) [GCC 13.3.0]",
+  "version_torch": "2.12.1+cu130"
+}
