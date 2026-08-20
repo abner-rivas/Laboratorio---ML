@@ -90,12 +90,12 @@
 #### Fase 6: Sistema RAG + FAISS (Proyecto Final) (15 Puntos)
 **Estado:** 🔴 Pendiente
 
-* [ ] Instalar FAISS y la librería de Sentence Transformers.
-* [ ] Generar los Embeddings para todos los fragmentos del documento seleccionado.
-* [ ] Construir el índice vectorial (Base Vectorial) utilizando FAISS.
-* [ ] Construir la función de Búsqueda Semántica: calcular el embedding de la pregunta del usuario y recuperar los fragmentos "Top-K".
-* [ ] Conectar la salida de FAISS con el modelo QA: inyectar los fragmentos recuperados para que el modelo extraiga la respuesta final.
-* [ ] Ejecutar experimentos adicionales exigidos: probar otro modelo de embeddings, variar tamaño de chunk (300, 500, 800) y alterar el valor de *K*.
+* [x] Instalar FAISS y la librería de Sentence Transformers.
+* [x] Generar los Embeddings para todos los fragmentos del documento seleccionado.
+* [x] Construir el índice vectorial (Base Vectorial) utilizando FAISS.
+* [x] Construir la función de Búsqueda Semántica: calcular el embedding de la pregunta del usuario y recuperar los fragmentos "Top-K".
+* [x] Conectar la salida de FAISS con el modelo QA: inyectar los fragmentos recuperados para que el modelo extraiga la respuesta final.
+* [x] Ejecutar experimentos adicionales exigidos: probar otro modelo de embeddings, variar tamaño de chunk (300, 500, 800) y alterar el valor de *K*.
 
 > **Artefacto esperado:** Arquitectura del asistente inteligente (RAG) completamente funcional en el notebook.
 
