@@ -140,7 +140,7 @@ Las preguntas documentales incluyeron tres fáciles, cuatro intermedias, dos dif
 
 ## 4.3 Software y reproducibilidad
 
-`requirements.txt` declara `transformers`, `torch`, `sentence-transformers`, `faiss-cpu`, `pandas`, `numpy`, `matplotlib`, `PyMuPDF` y `huggingface-hub`. El notebook indica Python 3.10 o superior y fue ejecutado en entornos Jupyter o equivalentes.
+`requirements.txt` declara `transformers`, `torch`, `sentence-transformers`, `faiss-cpu`, `pandas`, `numpy`, `matplotlib`, `PyMuPDF`, `huggingface-hub` y `pytest`. El notebook indica Python 3.10 o superior y fue ejecutado en entornos Jupyter o equivalentes.
 
 | Herramienta | Función principal |
 |---|---|
@@ -151,6 +151,7 @@ Las preguntas documentales incluyeron tres fáciles, cuatro intermedias, dos dif
 | Pandas y NumPy | Tablas, agregaciones y operaciones numéricas. |
 | Matplotlib | Gráficos experimentales. |
 | Hugging Face Hub | Identificación y carga de modelos. |
+| Pytest | Validación de metadata, métricas y clasificación de errores desde la raíz del repositorio. |
 
 Las dependencias no están fijadas a versiones concretas. Esta omisión limita la reproducción exacta de tokenización, tiempos y comportamiento de bibliotecas. El notebook ejecutado conserva, no obstante, los resultados experimentales finales y los CSV reúnen los registros consolidados. `results/resultados_qa.csv` contiene el detalle de la comparación QA y los resúmenes de las fases posteriores; `results/comparacion_modelos.csv` conserva el agregado de los tres modelos.
 

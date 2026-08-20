@@ -7,3 +7,4 @@ numpy
 matplotlib
 PyMuPDF
 huggingface-hub
+pytest

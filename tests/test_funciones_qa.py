@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import unittest
 
-from funciones_qa import (
+from src.funciones_qa import (
     calcular_metricas_recuperacion,
     chunk_relevante_multidocumento,
     clasificar_error_multidocumento,

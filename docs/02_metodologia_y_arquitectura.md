@@ -39,6 +39,7 @@ Cada fase mantuvo sus resultados históricos. Las decisiones finales se tomaron 
 | `matplotlib` | Visualización de resultados y exportación de gráficos. |
 | `PyMuPDF` | Apertura del PDF y extracción de texto página por página. |
 | `huggingface-hub` | Consulta y carga de información de modelos. |
+| `pytest` | Ejecución reproducible de las pruebas desde la raíz del repositorio. |
 
 Las comparaciones de modelos QA y la fase exhaustiva del documento quedaron registradas en CPU. La etapa RAG posterior registró CUDA para BETO. Esta diferencia no modifica los conteos de inferencias, pero limita la atribución del speedup temporal exclusivamente a la arquitectura.
 

@@ -16,7 +16,7 @@
 * [x] Generar el archivo `requirements.txt` con las librerías necesarias.
 
 > **Artefacto esperado:** Repositorio en GitHub funcional y estructurado.
-> **Nota:** Repositorio local inicializado con `.git/`, estructura de carpetas `data/`, `src/`, `results/` presente. El `README.md` describe el proyecto completo y `requirements.txt` lista todas las dependencias. Falta verificar si el repo está publicado en GitHub remoto y si existe la carpeta `docs/`.
+> **Nota:** El repositorio está publicado en GitHub y contiene `data/`, `src/`, `results/`, `tests/` y `docs/`. El `README.md` describe el proyecto completo y `requirements.txt` lista las dependencias necesarias.
 
 #### Fase 2: Fundamentos e Implementación QA Básica (20 Puntos)
 **Estado:** 🟢 Completado
@@ -84,28 +84,29 @@
 * [x] Realizar la prueba aislando la variable solapamiento: "Sin overlap" vs "Con overlap".
 * [x] Analizar y registrar: cantidad de fragmentos generados, tiempo invertido, calidad de la respuesta y efecto en el score según el overlap.
 
-> **Artefacto esperado:** Celdas del noteAnalizar y registrar: cantidad de fragmentos generados, tiempo invertido, calidad de la respuesta y efecto en el score según el overlap.extracción correcta de información en textos largos.
-> **Nota:** El archivo `data/documento_fuente.pdf` (≈487 KB) ya existe en la carpeta. Falta todo el desarrollo de chunking dentro del notebook limpio.
+> **Artefacto esperado:** Celdas del notebook con extracción, fragmentación y QA sobre textos largos, acompañadas por una comparación reproducible de las configuraciones con y sin solapamiento. ✔
+> **Nota:** `LaboratorioML.ipynb` conserva el desarrollo ejecutado y `data/documento_fuente.pdf` sigue siendo la única fuente de la parte obligatoria.
 
 #### Fase 6: Sistema RAG + FAISS (Proyecto Final) (15 Puntos)
-**Estado:** 🔴 Pendiente
+**Estado:** 🟢 Completado
 
-* [ ] Instalar FAISS y la librería de Sentence Transformers.
-* [ ] Generar los Embeddings para todos los fragmentos del documento seleccionado.
-* [ ] Construir el índice vectorial (Base Vectorial) utilizando FAISS.
-* [ ] Construir la función de Búsqueda Semántica: calcular el embedding de la pregunta del usuario y recuperar los fragmentos "Top-K".
-* [ ] Conectar la salida de FAISS con el modelo QA: inyectar los fragmentos recuperados para que el modelo extraiga la respuesta final.
-* [ ] Ejecutar experimentos adicionales exigidos: probar otro modelo de embeddings, variar tamaño de chunk (300, 500, 800) y alterar el valor de *K*.
+* [x] Instalar FAISS y la librería de Sentence Transformers.
+* [x] Generar los Embeddings para todos los fragmentos del documento seleccionado.
+* [x] Construir el índice vectorial (Base Vectorial) utilizando FAISS.
+* [x] Construir la función de Búsqueda Semántica: calcular el embedding de la pregunta del usuario y recuperar los fragmentos "Top-K".
+* [x] Conectar la salida de FAISS con el modelo QA: inyectar los fragmentos recuperados para que el modelo extraiga la respuesta final.
+* [x] Ejecutar experimentos adicionales exigidos: probar otro modelo de embeddings, variar tamaño de chunk (300, 500, 800) y alterar el valor de *K*.
 
-> **Artefacto esperado:** Arquitectura del asistente inteligente (RAG) completamente funcional en el notebook.
+> **Artefacto esperado:** Arquitectura del asistente inteligente (RAG) completamente funcional en el notebook. ✔
+> **Extensión adicional:** El corpus multidocumento se mantiene separado por PDF, con metadata de documento, página, chunk, posición y evidencia, además de métricas y análisis de errores propios.
 
 #### Fase 7: Documentación, Informe Técnico y Cierre (5 Puntos)
-**Estado:** 🔴 Pendiente
+**Estado:** 🟡 En progreso
 
 * [ ] Ejecutar el notebook de principio a fin (Run All) asegurando que todo el código, tablas, gráficos y resultados de FAISS se visualicen correctamente.
-* [ ] Redactar el Informe Técnico (máximo 25 páginas) estructurado exactamente según los 18 puntos del índice recomendado.
+* [x] Redactar el informe técnico y la documentación modular en español dentro de `docs/`.
 * [ ] Exportar el informe a PDF y guardarlo en la ruta `docs/informe.pdf`.
-* [ ] Asegurarse de que el enlace del repositorio GitHub esté en la portada del informe.
+* [x] Asegurarse de que el enlace del repositorio GitHub esté en la portada del informe.
 * [ ] Realizar los commits finales en GitHub (el historial de commits será evaluado como evidencia de trabajo).
 * [ ] Preparar el entorno para la defensa técnica (demostración funcional en vivo de 5 a 10 minutos).
 
@@ -117,10 +118,10 @@
 | Fase | Descripción | Puntos | Estado |
 |------|-------------|--------|--------|
 | 1 | Configuración del Entorno y Repositorio | 5 pts | 🟢 Completado |
-| 2 | Fundamentos e Implementación QA Básica | 20 pts | � Completado |
+| 2 | Fundamentos e Implementación QA Básica | 20 pts | 🟢 Completado |
 | 3 | Contexto Propio y Análisis de Score / Top-K | 20 pts | 🟢 Completado |
 | 4 | Benchmark y Comparación de Modelos | 15 pts | 🟢 Completado |
-| 5 | Documentos Extensos, Chunking y Overlap | 20 pts | 🟡 En Progreso (~10%) |
-| 6 | Sistema RAG + FAISS | 15 pts | 🔴 Pendiente |
-| 7 | Documentación, Informe Técnico y Cierre | 5 pts | 🔴 Pendiente |
-| **TOTAL** | | **100 pts** | **~60% completado** |
+| 5 | Documentos Extensos, Chunking y Overlap | 20 pts | 🟢 Completado |
+| 6 | Sistema RAG + FAISS | 15 pts | 🟢 Completado |
+| 7 | Documentación, Informe Técnico y Cierre | 5 pts | 🟡 En progreso |
+| **TOTAL** | | **100 pts** | **~95% completado; cierre pendiente** |

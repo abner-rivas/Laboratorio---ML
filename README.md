@@ -95,6 +95,7 @@ Desde un entorno limpio, en la raíz del repositorio:
 python -m venv .venv
 source .venv/bin/activate
 python -m pip install -r requirements.txt
+pytest -q
 python src/ejecutar_rag_multidocumento.py
 ```
 
