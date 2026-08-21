@@ -19,9 +19,32 @@ La matriz permite auditar las afirmaciones principales sin reconstruir el experi
 | Pruebas ligeras | Cuatro pruebas deterministas sin modelos pesados | `tests/` | Suite rápida desde la raíz | `pytest -q` | COMPLETO |
 | Dependencias y reproducibilidad | Instalación, ejecución y validación documentadas | `requirements.txt`, `README.md` | Comandos reproducibles; versiones experimentales registradas sin inventar lock | Configuración JSON y README | COMPLETO |
 | Resultados y gráficos | Consolidación sin regenerar experimentos | `results/` | CSV, FAISS y 14 PNG válidos | Validador integral | COMPLETO |
-| Informe académico | Fuente Markdown y maquetación profesional | `docs/informe.md`, `docs/informe.tex` | Teoría, metodología, resultados, discusión y anexos | Fuente LaTeX y referencias verificadas | COMPLETO |
-| Entregable PDF | Compilación desde la fuente LaTeX | `docs/informe.pdf` | PDF final inspeccionado | Log de compilación y checklist | COMPLETO |
+| Informe académico | Reestructuración según el orden oficial del laboratorio | `docs/informe.tex` | Secciones 2--18 en el orden solicitado, sin capítulos ajenos a la guía | Índice, fuente LaTeX y referencias verificadas | COMPLETO |
+| Entregable PDF | Compilación desde la fuente LaTeX | `docs/informe.pdf` | 20 páginas de cuerpo, 2 de anexos y 26 físicas con portada e índice | Log limpio, conteo e inspección visual | COMPLETO |
 | Privacidad y portabilidad | Eliminación de metadata personal de ejecución y uso de rutas relativas | Notebooks y repositorio | Sin credenciales ni rutas locales necesarias | Búsquedas de cierre | COMPLETO |
+
+## Mapeo de la guía al informe definitivo
+
+| Requisito de la guía | Sección del informe | Evidencia factual principal | Estado |
+|---|---|---|---|
+| Portada institucional | 1. Portada | `docs/00_datos_generales.md` | COMPLETO |
+| Introducción y objetivos | 2--3 | Guía y propósito del notebook canónico | COMPLETO |
+| Catorce fundamentos teóricos | 4.1--4.14 | Bibliografía académica y componentes ejecutados | COMPLETO |
+| Herramientas y tecnologías | 5 | `requirements.txt`, notebooks y `src/` | COMPLETO |
+| Desarrollo de QA | 6.1--6.6 | Implementación básica de `LaboratorioML.ipynb` | COMPLETO |
+| Experimentos iniciales | 7.1--7.6 | Contexto del Sistema Solar y salidas ejecutadas | COMPLETO |
+| Contexto propio y diez preguntas | 8.1--8.7 | Resumen `qa_basico` y tabla ejecutada del notebook | COMPLETO |
+| Comparación de modelos | 9.1--9.9 | 45 registros controlados de `resultados_qa.csv` | COMPLETO |
+| Diferentes contextos | 10.1--10.5 | UES, bases de datos y Wikipedia en resultados controlados | COMPLETO |
+| QA sobre documento extenso | 11.1--11.6 | PDF de 62 páginas y evaluaciones de fragmentación | COMPLETO |
+| Evaluación del overlap | 12.1--12.5 | Configuraciones 300/0, 300/50, 500/0, 500/100, 800/0 y 800/150 | COMPLETO |
+| Sistema RAG | 13.1--13.8 | MPNet, FAISS, Top-10 y BETO-SQAC | COMPLETO |
+| Extensión multidocumento integrada | 13.9 | Artefactos `rag_multidocumento_*` y notebook de demostración | COMPLETO |
+| Proyecto final | 14.1--14.13 | Configuración final y resultados mono/multidocumento | COMPLETO |
+| Experimentos adicionales | 15.1--15.5 | MiniLM/MPNet, chunks, overlap, K y tamaños de base | COMPLETO |
+| Conclusiones requeridas | 16 | Resultados estructurados y análisis por etapa | COMPLETO |
+| Referencias bibliográficas | 17 | `docs/referencias.md` | COMPLETO |
+| Anexos | 18 | Preguntas, protocolos, comparación y enlaces de evidencia | COMPLETO |
 
 | Afirmación / resultado | Fuente | Ubicación aproximada | Archivo de apoyo |
 |---|---|---|---|
