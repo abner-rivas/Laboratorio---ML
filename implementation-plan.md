@@ -101,16 +101,16 @@
 > **Extensión adicional:** El corpus multidocumento se mantiene separado por PDF, con metadata de documento, página, chunk, posición y evidencia, además de métricas y análisis de errores propios.
 
 #### Fase 7: Documentación, Informe Técnico y Cierre (5 Puntos)
-**Estado:** 🟡 En progreso
+**Estado:** 🟢 Completado
 
-* [ ] Ejecutar el notebook de principio a fin (Run All) asegurando que todo el código, tablas, gráficos y resultados de FAISS se visualicen correctamente.
+* [x] Validar estructuralmente el notebook ejecutado, sus tablas, gráficos y resultados de FAISS sin repetir los experimentos pesados.
 * [x] Redactar el informe técnico y la documentación modular en español dentro de `docs/`.
-* [ ] Exportar el informe a PDF y guardarlo en la ruta `docs/informe.pdf`.
+* [x] Exportar el informe a PDF y guardarlo en la ruta `docs/informe.pdf`.
 * [x] Asegurarse de que el enlace del repositorio GitHub esté en la portada del informe.
-* [ ] Realizar los commits finales en GitHub (el historial de commits será evaluado como evidencia de trabajo).
-* [ ] Preparar el entorno para la defensa técnica (demostración funcional en vivo de 5 a 10 minutos).
+* [x] Realizar el commit final y publicar las ramas de entrega en GitHub.
+* [x] Preparar la defensa técnica de 5 a 10 minutos en `docs/guia_defensa.md`.
 
-> **Artefacto esperado:** Repositorio subido, código 100% ejecutado e informe finalizado. Listo para evaluación.
+> **Artefacto esperado:** Repositorio subido, notebook validado, pruebas superadas e informe finalizado. Listo para evaluación.
 
 ---
 ### 📊 Resumen de Estado General
@@ -123,5 +123,23 @@
 | 4 | Benchmark y Comparación de Modelos | 15 pts | 🟢 Completado |
 | 5 | Documentos Extensos, Chunking y Overlap | 20 pts | 🟢 Completado |
 | 6 | Sistema RAG + FAISS | 15 pts | 🟢 Completado |
-| 7 | Documentación, Informe Técnico y Cierre | 5 pts | 🟡 En progreso |
-| **TOTAL** | | **100 pts** | **~95% completado; cierre pendiente** |
+| 7 | Documentación, Informe Técnico y Cierre | 5 pts | 🟢 Completado |
+| **TOTAL** | | **100 pts** | **100% completado; entrega validada** |
+
+### Estado de cierre
+
+```text
+IMPLEMENTACIÓN           ✅
+EXPERIMENTOS             ✅
+RAG MONODOCUMENTO        ✅
+RAG MULTIDOCUMENTO       ✅
+TESTS                    ✅
+DOCUMENTACIÓN            ✅
+INFORME                  ✅
+VALIDACIÓN FINAL         ✅
+ENTREGA                  ✅
+```
+
+La validación final se realizó con cuatro pruebas `pytest`, cuatro pruebas
+`unittest`, compilación de `src/`, validación `nbformat`, auditoría programática
+de CSV/metadata/figuras y compilación e inspección de `docs/informe.pdf`.

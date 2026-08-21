@@ -8,3 +8,5 @@ matplotlib
 PyMuPDF
 huggingface-hub
 pytest
+nbformat
+jupyterlab

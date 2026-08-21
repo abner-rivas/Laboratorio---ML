@@ -16,9 +16,14 @@ El notebook ejecutado continúa siendo la evidencia experimental principal. Los 
 | `06_hallazgos_limitaciones_y_trabajo_futuro.md` | Separa hallazgos demostrados, errores, limitaciones y extensiones no implementadas. |
 | `07_rag_multidocumento.md` | Documenta corpus, arquitectura, métricas, errores y conclusiones de la extensión multidocumento. |
 | `07_trazabilidad.md` | Relaciona afirmaciones y figuras con el notebook, los CSV, el PDF y el código de apoyo. |
-| `08_guia_maquetacion_latex.md` | Orienta la conversión posterior de Markdown a LaTeX y PDF sin producir esos artefactos todavía. |
+| `08_guia_maquetacion_latex.md` | Registra las decisiones y verificaciones de la maquetación LaTeX/PDF. |
+| `referencias.md` | Bibliografía verificada y enlaces primarios u oficiales. |
+| `checklist_entrega.md` | Evidencia breve de la validación final. |
+| `guia_defensa.md` | Guion de siete minutos, comandos y preguntas previsibles. |
 | `anexos.md` | Conserva preguntas, configuraciones y evidencia secundaria que no debe recargar el cuerpo principal. |
-| `informe.md` | Síntesis académica principal preparada para la futura adaptación a LaTeX. |
+| `informe.md` | Fuente narrativa principal del informe. |
+| `informe.tex` | Fuente LaTeX final con tablas, figuras, ecuaciones y bibliografía. |
+| `informe.pdf` | Entregable académico compilado. |
 
 ## Flujo documental
 
@@ -42,12 +47,12 @@ Cada nivel cumple una función distinta:
 - **CSV y gráficos:** resultados consolidados y visualizaciones reproducibles.
 - **Markdown modular:** explicación técnica, decisiones, interpretación y trazabilidad.
 - **`informe.md`:** fuente narrativa consolidada para el cuerpo académico.
-- **LaTeX:** maquetación, referencias cruzadas, numeración y control tipográfico.
-- **PDF:** entrega final; no forma parte de esta fase.
+- **`informe.tex`:** maquetación, referencias cruzadas, numeración y control tipográfico.
+- **`informe.pdf`:** entrega final compilada desde la fuente LaTeX.
 
 ## Orden de lectura recomendado
 
-Para comprender el proyecto desde cero se recomienda leer `00_datos_generales.md`, `01_fundamentos_teoricos.md`, `02_metodologia_y_arquitectura.md` y `03_desarrollo_experimental.md`. Luego deben consultarse `04_decisiones_tecnicas.md` y `05_resultados_y_analisis.md`. Las condiciones que limitan las conclusiones están en `06_hallazgos_limitaciones_y_trabajo_futuro.md`; la ampliación se desarrolla en `07_rag_multidocumento.md`. Antes de maquetar, se deben revisar `07_trazabilidad.md`, `08_guia_maquetacion_latex.md` y `anexos.md`.
+Para comprender el proyecto desde cero se recomienda leer `00_datos_generales.md`, `01_fundamentos_teoricos.md`, `02_metodologia_y_arquitectura.md` y `03_desarrollo_experimental.md`. Luego deben consultarse `04_decisiones_tecnicas.md` y `05_resultados_y_analisis.md`. Las condiciones que limitan las conclusiones están en `06_hallazgos_limitaciones_y_trabajo_futuro.md`; la ampliación se desarrolla en `07_rag_multidocumento.md`. Para auditar la entrega se deben revisar `07_trazabilidad.md`, `08_guia_maquetacion_latex.md`, `checklist_entrega.md` y `anexos.md`.
 
 ## Reglas de uso
 
@@ -56,5 +61,5 @@ Para comprender el proyecto desde cero se recomienda leer `00_datos_generales.md
 - No describir BETO-SQAC como modelo generativo: extrae spans del contexto.
 - No afirmar que los modelos fueron entrenados desde cero.
 - Distinguir siempre la parte obligatoria monodocumento de la extensión multidocumento.
-- Marcar como `[PENDIENTE DE VERIFICAR]` cualquier referencia bibliográfica que aún no tenga datos completos.
-- No generar `informe.tex` ni `informe.pdf` hasta la fase de maquetación.
+- Consultar `referencias.md` antes de modificar una cita bibliográfica.
+- Regenerar `informe.pdf` únicamente desde `informe.tex` y conservar fuera del repositorio los archivos auxiliares de LaTeX.

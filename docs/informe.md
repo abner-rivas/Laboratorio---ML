@@ -153,7 +153,7 @@ Las preguntas documentales incluyeron tres fáciles, cuatro intermedias, dos dif
 | Hugging Face Hub | Identificación y carga de modelos. |
 | Pytest | Validación de metadata, métricas y clasificación de errores desde la raíz del repositorio. |
 
-Las dependencias no están fijadas a versiones concretas. Esta omisión limita la reproducción exacta de tokenización, tiempos y comportamiento de bibliotecas. El notebook ejecutado conserva, no obstante, los resultados experimentales finales y los CSV reúnen los registros consolidados. `results/resultados_qa.csv` contiene el detalle de la comparación QA y los resúmenes de las fases posteriores; `results/comparacion_modelos.csv` conserva el agregado de los tres modelos.
+Las dependencias no están fijadas a versiones concretas. Esta omisión limita la reproducción exacta de tokenización, tiempos y comportamiento de bibliotecas. El notebook ejecutado conserva, no obstante, los resultados experimentales finales y los CSV reúnen los registros consolidados. `results/resultados_qa.csv` contiene las 45 inferencias de la comparación controlada que seleccionó BETO-SQAC y los resúmenes de las fases posteriores. `results/comparacion_modelos.csv` conserva un benchmark histórico más amplio de 60 inferencias (20 por modelo); no debe usarse como si fuera el agregado 13/15, 13/15 y 15/15.
 
 # 5. Desarrollo de Question Answering
 
@@ -690,16 +690,13 @@ mucho mayor.
 
 # 19. Referencias
 
-No se incorporan datos bibliográficos no verificados. Antes de generar el informe LaTeX deberán completarse las siguientes entradas:
-
-- Arquitectura Transformer: `[PENDIENTE DE VERIFICAR]`.
-- BERT: `[PENDIENTE DE VERIFICAR]`.
-- Hugging Face Transformers: `[PENDIENTE DE VERIFICAR]`.
-- BETO y fichas de los tres modelos QA: `[PENDIENTE DE VERIFICAR]`.
-- Sentence Transformers y modelos MiniLM/MPNet: `[PENDIENTE DE VERIFICAR]`.
-- FAISS: `[PENDIENTE DE VERIFICAR]`.
-- PyMuPDF: `[PENDIENTE DE VERIFICAR]`.
-- *Reglamento de la Gestión Académico-Administrativa de la Universidad de El Salvador*: datos disponibles en `data/documento_fuente.pdf`; formato bibliográfico final `[PENDIENTE DE VERIFICAR]`.
+Las referencias bibliográficas y tecnológicas fueron verificadas contra las
+publicaciones de NeurIPS y ACL Anthology, el programa oficial PML4DC de ICLR y
+la documentación oficial de Hugging Face, FAISS y PyMuPDF. La lista completa,
+con autores, año, publicación y enlace, se conserva en `referencias.md` y fue
+trasladada a la bibliografía de `informe.tex`. Incluye Transformer, BERT, BETO,
+Sentence-BERT, MPNet, FAISS, RAG, QA extractivo, los checkpoints ejecutados,
+PyMuPDF y el reglamento institucional.
 
 # 20. Anexos
 
@@ -737,7 +734,7 @@ Las preguntas completas fueron:
 |---|---|
 | `LaboratorioML.ipynb` | Configuración ejecutada, salidas, preguntas, tiempos, tablas, decisiones e historial experimental |
 | `results/resultados_qa.csv` | Detalle de la comparación QA y resúmenes de QA básico, chunking, MiniLM, MPNet y tamaño de base |
-| `results/comparacion_modelos.csv` | Agregado global de los tres modelos QA |
+| `results/comparacion_modelos.csv` | Benchmark histórico de 60 inferencias; complementa, pero no sustituye, la comparación controlada final |
 | `results/graficos/` | Figuras exportadas de Top-K, baseline, embeddings y tamaño de base |
 | `data/README.md` | Identidad, alcance y propiedades generales del documento oficial |
 | `data/documento_fuente.pdf` | Evidencia normativa de las diez preguntas documentales |

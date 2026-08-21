@@ -109,7 +109,9 @@ Repositorio oficial del laboratorio:
 
 https://github.com/abner-rivas/Laboratorio---ML.git
 
-El repositorio contiene el notebook ejecutado, el PDF fuente, las funciones de apoyo, los CSV, los gráficos y esta documentación. No contiene todavía `docs/informe.tex` ni `docs/informe.pdf`.
+El repositorio contiene el notebook ejecutado, el PDF fuente, las funciones de
+apoyo, los CSV, los gráficos, `docs/informe.tex` y el entregable
+`docs/informe.pdf`.
 
 ## Anexo H — Extensión multidocumento
 

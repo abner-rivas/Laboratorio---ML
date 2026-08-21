@@ -206,15 +206,13 @@ span con mayor score QA
 
 Ambos flujos deben conservarse separados para identificar si un fallo procede de extracción del PDF, fragmentación, recuperación o Question Answering.
 
-## Referencias provisionales
+## Referencias verificadas
 
-Los conceptos anteriores se corresponden con tecnologías y modelos utilizados en el repositorio. Los datos bibliográficos completos deberán verificarse antes de generar la bibliografía final:
-
-- Arquitectura Transformer: `[PENDIENTE DE VERIFICAR]`.
-- BERT: `[PENDIENTE DE VERIFICAR]`.
-- BETO y fichas de los tres modelos QA: `[PENDIENTE DE VERIFICAR]`.
-- Hugging Face Transformers: `[PENDIENTE DE VERIFICAR]`.
-- Sentence Transformers: `[PENDIENTE DE VERIFICAR]`.
-- FAISS: `[PENDIENTE DE VERIFICAR]`.
-- PyMuPDF: `[PENDIENTE DE VERIFICAR]`.
-
+La arquitectura Transformer se sustenta en Vaswani et al. (2017); BERT, en
+Devlin et al. (2019); y BETO, en Cañete et al. (2020). La representación de
+oraciones y el modelo MPNet se documentan en Reimers y Gurevych (2019) y Song
+et al. (2020), respectivamente. FAISS se apoya en Johnson, Douze y Jégou
+(2019), y la denominación RAG en Lewis et al. (2020). También se verificaron la
+documentación oficial de QA de Hugging Face, las fichas de los dos checkpoints
+finales y la guía de extracción de PyMuPDF. Las entradas completas y sus
+enlaces están en `referencias.md` y en la bibliografía de `informe.tex`.

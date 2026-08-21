@@ -1,8 +1,8 @@
-# Guía para maquetación en LaTeX
+# Guía y registro de maquetación en LaTeX
 
 ## 1. Objetivo
 
-La fase posterior transformará:
+La entrega final sigue este flujo:
 
 ```text
 docs/informe.md
@@ -41,24 +41,25 @@ La suma es una guía. La prioridad es mantener teoría, metodología, resultados
 
 ## 4. Paquetes LaTeX sugeridos
 
-Estos paquetes pueden evaluarse durante la fase de maquetación; no se genera todavía ningún preámbulo:
+El preámbulo final utiliza paquetes estables de TeX Live para español, tablas,
+ecuaciones, gráficos, microtipografía y enlaces:
 
 | Paquete | Uso sugerido |
 |---|---|
 | `geometry` | Márgenes y tamaño de página. |
 | `graphicx` | Inclusión y escalado de figuras. |
 | `booktabs` | Reglas tipográficas de tablas. |
-| `float` | Control prudente de posición de figuras y tablas. |
 | `hyperref` | Enlaces, referencias y metadatos del PDF. |
 | `amsmath` | Ecuaciones y símbolos matemáticos. |
 | `array` | Tipos de columna y control de tablas. |
 | `longtable` | Tablas que deben ocupar varias páginas. |
-| `caption` | Formato de títulos de figuras y tablas. |
-| `subcaption` | Figuras relacionadas colocadas como subfiguras. |
 | `xcolor` | Colores sobrios cuando sean necesarios. |
-| `enumitem` | Espaciado y formato de listas. |
+| `microtype` | Mejora tipográfica y ajuste de párrafos. |
 
-Debe elegirse un motor compatible con español y Unicode. La selección exacta del motor y la plantilla queda `[PENDIENTE DE VERIFICAR]` durante la fase LaTeX.
+El documento está preparado para `pdflatex`; utiliza codificación UTF-8, fuentes
+T1 y `babel` con español. `latexmk` ejecuta automáticamente las pasadas necesarias
+para resolver índice y referencias cruzadas. La copia final también fue compilada
+con Tectonic 0.17.0, alternativa autocontenida basada en XeTeX.
 
 ## 5. Figuras
 
@@ -122,20 +123,11 @@ La arquitectura puede explicarse mejor mediante flujos simples que mediante bloq
 
 ## 8. Bibliografía
 
-La bibliografía final deberá prepararse en BibTeX o en el formato exigido por el curso. No deben inventarse autores, años, DOI o URLs.
-
-Las entradas por verificar incluyen:
-
-- Transformer;
-- BERT;
-- modelos BETO utilizados;
-- Hugging Face Transformers;
-- Sentence Transformers;
-- FAISS;
-- PyMuPDF;
-- documento de la Universidad de El Salvador.
-
-Mientras los datos no se hayan comprobado, conservar `[PENDIENTE DE VERIFICAR]`. Las rutas y fichas de modelos pueden verificarse posteriormente a partir de sus identificadores exactos.
+Las referencias de Transformer, BERT, BETO, Sentence-BERT, MPNet, FAISS, RAG,
+Hugging Face y PyMuPDF fueron contrastadas con publicaciones primarias,
+documentación oficial o fichas oficiales de modelos. La relación verificable se
+conserva en `referencias.md` y la bibliografía utilizada está incorporada en
+`informe.tex`. No se asignaron DOI ni datos editoriales no comprobados.
 
 ## 9. Elementos esenciales
 
@@ -158,7 +150,7 @@ El documento final debe incluir:
 1. Revisar `00_datos_generales.md` y trasladar los datos de portada.
 2. Usar `informe.md` como fuente del cuerpo principal.
 3. Consultar archivos modulares para aclarar o ampliar secciones.
-4. Resolver las marcas `[PENDIENTE DE VERIFICAR]` de bibliografía.
+4. Contrastar las referencias con `referencias.md`.
 5. Convertir la estructura Markdown a capítulos o secciones LaTeX.
 6. Sustituir tablas Markdown por `tabular`, `tabularx` o `longtable` según ancho.
 7. Insertar figuras desde `results/graficos/` con rutas válidas.
@@ -166,41 +158,57 @@ El documento final debe incluir:
 9. Aplicar `\appendix` antes del contenido de `anexos.md`.
 10. Compilar y revisar advertencias, desbordamientos y páginas.
 
+Desde la raíz del repositorio:
+
+```bash
+cd docs
+latexmk -pdf -interaction=nonstopmode -halt-on-error informe.tex
+latexmk -c informe.tex
+```
+
+El segundo comando elimina auxiliares y conserva `informe.pdf`.
+
+Alternativa verificada cuando no se dispone de TeX Live del sistema:
+
+```bash
+cd docs
+tectonic -X compile informe.tex
+```
+
 ## 11. Checklist de compilación
 
 ### Contenido
 
-- [ ] Portada con universidad, facultad, escuela, curso, estudiantes, catedrático y fecha correctos.
-- [ ] BETO-SQAC aparece como modelo QA final.
-- [ ] MPNet aparece como embedding final; MiniLM se conserva como resultado histórico.
-- [ ] Configuración final: 800/0, Top-10 y `IndexFlatIP`.
-- [ ] Accuracy y Recall@10 finales: 60 %.
-- [ ] Score QA no se presenta como accuracy.
-- [ ] El sistema se describe como monodocumento y extractivo.
+- [x] Portada con universidad, facultad, escuela, curso, estudiantes, catedrático y fecha correctos.
+- [x] BETO-SQAC aparece como modelo QA final.
+- [x] MPNet aparece como embedding final; MiniLM se conserva como resultado histórico.
+- [x] Configuración final: 800/0, Top-10 y `IndexFlatIP`.
+- [x] Accuracy y Recall@10 finales: 60 %.
+- [x] Score QA no se presenta como accuracy.
+- [x] El sistema se describe como monodocumento y extractivo.
 
 ### Formato
 
-- [ ] El cuerpo principal está entre 18 y 22 páginas o, como máximo, 25.
-- [ ] No hay tablas fuera del margen.
-- [ ] Las figuras mantienen proporción y resolución.
-- [ ] Todas las figuras y tablas tienen número, título y referencia.
-- [ ] Las ecuaciones compilan sin errores.
-- [ ] Los enlaces no están rotos.
-- [ ] El índice coincide con los títulos.
-- [ ] Los anexos no se cuentan dentro del límite cuando la normativa lo permita.
+- [x] El PDF tiene 24 páginas físicas y respeta el máximo de 25.
+- [x] No hay tablas fuera del margen.
+- [x] Las figuras mantienen proporción y resolución.
+- [x] Todas las figuras y tablas tienen número, título y referencia.
+- [x] Las ecuaciones compilan sin errores.
+- [x] Los enlaces utilizados fueron verificados.
+- [x] El índice coincide con los títulos.
+- [x] Los anexos están separados y el límite se cumple sin depender de excluirlos.
 
 ### Bibliografía
 
-- [ ] No quedan referencias inventadas.
-- [ ] Cada `[PENDIENTE DE VERIFICAR]` fue resuelto o retirado.
-- [ ] Las citas del texto tienen entrada bibliográfica.
-- [ ] El reglamento UES se identifica con datos comprobables del documento.
+- [x] No quedan referencias inventadas.
+- [x] No quedan marcas bibliográficas pendientes.
+- [x] Las citas del texto tienen entrada bibliográfica.
+- [x] El documento fuente UES se identifica sin atribuirle datos no comprobados.
 
 ### Compilación
 
-- [ ] Primera compilación sin errores fatales.
-- [ ] Referencias cruzadas resueltas después de las compilaciones necesarias.
-- [ ] No hay advertencias de cajas desbordadas que afecten legibilidad.
-- [ ] El PDF incluye fuentes y caracteres españoles correctamente.
-- [ ] El archivo final se genera como `docs/informe.pdf` únicamente en la fase autorizada.
-
+- [x] Compilación final sin errores fatales.
+- [x] Referencias cruzadas resueltas después de tres pasadas automáticas.
+- [x] No hay advertencias de cajas desbordadas ni problemas de legibilidad.
+- [x] El PDF incluye fuentes y caracteres españoles correctamente.
+- [x] El archivo final se generó como `docs/informe.pdf` en la fase autorizada.

@@ -2,13 +2,34 @@
 
 La matriz permite auditar las afirmaciones principales sin reconstruir el experimento. La ubicación del notebook se expresa por título de sección o salida visible, porque el número de celda puede cambiar si se edita la estructura.
 
+## Matriz de requisitos de cierre
+
+| Requisito | Implementación | Archivo | Resultado | Evidencia | Estado |
+|---|---|---|---|---|---|
+| Notebook canónico ejecutado | Desarrollo completo con salidas persistidas | `LaboratorioML.ipynb` | 273 celdas; 129 de código; 144 Markdown; sin errores | Validación `nbformat` y `scripts/validar_entrega.py` | COMPLETO |
+| Antecedente histórico diferenciado | Señalización explícita en la entrada del proyecto | `README.md`, `laboratorio_ml_qa.ipynb` | No compite con el notebook canónico | Sección «Ejecución» del README | COMPLETO |
+| QA extractivo | Funciones y pipeline BETO/SQAC | `src/funciones_qa.py`, notebook | Configuración final conservada | Salidas y CSV monodocumento | COMPLETO |
+| Preparación documental y chunking | Extracción por página y fragmentos trazables | `src/funciones_qa.py`, notebook | 62 páginas y 217 chunks en 800/0 | `data/documento_fuente.pdf`, CSV | COMPLETO |
+| Embeddings y FAISS | MPNet normalizado e `IndexFlatIP` | Notebook, `requirements.txt` | 217 vectores de 768 dimensiones | Resultados RAG | COMPLETO |
+| Evaluación Top-K | Comparación de K=1, 3, 5 y 10 | Notebook | Top-10 seleccionado con evidencia | CSV y gráficos Top-K | COMPLETO |
+| RAG monodocumento | Recuperación y QA sobre el documento oficial | Notebook | Recall@10 y accuracy de 60 % | `results/resultados_qa.csv` | COMPLETO |
+| RAG multidocumento | Nueve índices lógicos preservando identidad de fuente | `src/ejecutar_rag_multidocumento.py`, notebook | 9 PDF, 199 páginas y 765 chunks | Artefactos `rag_multidocumento_*` | COMPLETO |
+| Trazabilidad de chunks | Metadata alineada uno a uno con el índice | Código y JSONL | 765 registros válidos | `rag_multidocumento_metadata.jsonl` | COMPLETO |
+| Análisis de errores | Tipología A--E y observaciones reales | Documentación y CSV | 6 A, 6 B, 1 C, 0 D y 2 E | `rag_multidocumento_errores.csv` | COMPLETO |
+| Pruebas ligeras | Cuatro pruebas deterministas sin modelos pesados | `tests/` | Suite rápida desde la raíz | `pytest -q` | COMPLETO |
+| Dependencias y reproducibilidad | Instalación, ejecución y validación documentadas | `requirements.txt`, `README.md` | Comandos reproducibles; versiones experimentales registradas sin inventar lock | Configuración JSON y README | COMPLETO |
+| Resultados y gráficos | Consolidación sin regenerar experimentos | `results/` | CSV, FAISS y 14 PNG válidos | Validador integral | COMPLETO |
+| Informe académico | Fuente Markdown y maquetación profesional | `docs/informe.md`, `docs/informe.tex` | Teoría, metodología, resultados, discusión y anexos | Fuente LaTeX y referencias verificadas | COMPLETO |
+| Entregable PDF | Compilación desde la fuente LaTeX | `docs/informe.pdf` | PDF final inspeccionado | Log de compilación y checklist | COMPLETO |
+| Privacidad y portabilidad | Eliminación de metadata personal de ejecución y uso de rutas relativas | Notebooks y repositorio | Sin credenciales ni rutas locales necesarias | Búsquedas de cierre | COMPLETO |
+
 | Afirmación / resultado | Fuente | Ubicación aproximada | Archivo de apoyo |
 |---|---|---|---|
 | El modelo base real es BERT/BETO y no RoBERTa-BNE | `LaboratorioML.ipynb` | Secciones 1.5 y 2.3 | Identificador en las celdas de carga |
 | Modelos QA evaluados | `LaboratorioML.ipynb` | Sección 8 | `results/resultados_qa.csv` |
-| BETO-SQuAD2 (mrm8488) obtuvo 13/15 | Notebook ejecutado | Sección 11, comparación global | `results/comparacion_modelos.csv` |
-| BETO-SQuAD2 (MMG) obtuvo 13/15 | Notebook ejecutado | Sección 11, comparación global | `results/comparacion_modelos.csv` |
-| BETO-SQAC obtuvo 15/15 | Notebook ejecutado | Sección 11, comparación global | `results/comparacion_modelos.csv` |
+| BETO-SQuAD2 (mrm8488) obtuvo 13/15 | Notebook ejecutado | Sección 11, comparación controlada | `results/resultados_qa.csv` |
+| BETO-SQuAD2 (MMG) obtuvo 13/15 | Notebook ejecutado | Sección 11, comparación controlada | `results/resultados_qa.csv` |
+| BETO-SQAC obtuvo 15/15 | Notebook ejecutado | Sección 11, comparación controlada | `results/resultados_qa.csv` |
 | BETO-SQAC fue el QA final | Notebook ejecutado | Sección 11.1 y configuración final | `results/comparacion_modelos.csv` |
 | El contexto propio tuvo 308 palabras y diez preguntas | Notebook ejecutado | Sección 7 | Registro `qa_basico` en `results/resultados_qa.csv` |
 | El contexto propio obtuvo 10/10 | Notebook ejecutado | Sección 7.4–7.6 | `results/resultados_qa.csv` |
@@ -81,14 +102,10 @@ No es necesario insertar las diez figuras en el cuerpo. `informe.md` utiliza una
 
 ### `results/comparacion_modelos.csv`
 
-Contiene tres filas agregadas, una por modelo, con:
-
-- correctas sobre 15;
-- accuracy;
-- score medio;
-- tiempo medio.
-
-Debe usarse para el resumen global de modelos. El detalle por contexto está en el notebook y en las primeras 45 filas de `resultados_qa.csv`.
+Contiene 60 inferencias de un benchmark histórico: 20 por modelo, distribuidas
+en diez preguntas del contexto propio, cinco de Wikipedia y cinco de bases de
+datos. Sus agregados son 17/20, 16/20 y 18/20. No es el mismo conjunto
+controlado de 45 inferencias utilizado después para seleccionar BETO-SQAC.
 
 ### `results/resultados_qa.csv`
 
@@ -125,4 +142,6 @@ Si un texto narrativo antiguo difiere de las tablas finales, se debe aplicar est
 4. código de apoyo y gráficos;
 5. narrativa histórica, conservada únicamente para explicar la evolución.
 
-No se deben completar citas bibliográficas con memoria o suposición. Cualquier dato no verificado se marca `[PENDIENTE DE VERIFICAR]`.
+Las referencias bibliográficas verificadas se conservan en
+`docs/referencias.md` y en `docs/informe.tex`. No quedan marcas bibliográficas
+pendientes en los entregables finales.
