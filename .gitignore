@@ -76,3 +76,15 @@ Thumbs.db
 
 # Archivos locales de configuración
 .local/
+.env
+
+# Temporales de LaTeX (se conserva docs/informe.pdf)
+*.aux
+*.log
+*.out
+*.toc
+*.lof
+*.lot
+*.fls
+*.fdb_latexmk
+*.synctex.gz
