@@ -5,6 +5,7 @@ from __future__ import annotations
 import unittest
 
 from src.funciones_qa import (
+    ExtractorQAManual,
     calcular_metricas_recuperacion,
     chunk_relevante_multidocumento,
     clasificar_error_multidocumento,
@@ -16,6 +17,10 @@ from src.funciones_qa import (
 
 
 class PruebasRAGMultidocumento(unittest.TestCase):
+    def test_adaptador_qa_es_reutilizable(self) -> None:
+        self.assertTrue(callable(ExtractorQAManual))
+        self.assertEqual(ExtractorQAManual.__module__, "src.funciones_qa")
+
     def setUp(self) -> None:
         self.documentos = [
             {
@@ -46,6 +51,7 @@ class PruebasRAGMultidocumento(unittest.TestCase):
             [chunk["chunk_global_id"] for chunk in chunks], [1, 2, 3, 4, 5]
         )
         self.assertEqual({chunk["documento"] for chunk in chunks}, {"a.pdf", "b.pdf"})
+        self.assertEqual({chunk["archivo"] for chunk in chunks}, {"a.pdf", "b.pdf"})
         self.assertEqual(validar_metadata_chunks(chunks)["chunks"], 5)
 
     def test_ranking_documento_y_chunk_son_metricas_distintas(self) -> None:

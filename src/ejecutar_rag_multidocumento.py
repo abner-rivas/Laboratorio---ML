@@ -26,9 +26,9 @@ import numpy as np
 import pandas as pd
 import torch
 from sentence_transformers import SentenceTransformer
-from transformers import AutoModelForQuestionAnswering, AutoTokenizer
 
 from funciones_qa import (
+    ExtractorQAManual,
     buscar_chunks_multidocumento,
     calcular_metricas_recuperacion,
     cargar_corpus_multidocumento,
@@ -53,80 +53,6 @@ OVERLAP = 0
 TOP_K = 10
 VALORES_K = (1, 3, 5, 10)
 SEMILLA = 42
-
-
-class ExtractorQAManual:
-    """Adaptador QA compatible con la inferencia manual del notebook."""
-
-    def __init__(self, modelo: str, dispositivo: str) -> None:
-        self.tokenizer = AutoTokenizer.from_pretrained(modelo)
-        self.modelo = AutoModelForQuestionAnswering.from_pretrained(modelo)
-        self.dispositivo = torch.device(dispositivo)
-        self.modelo.to(self.dispositivo)
-        self.modelo.eval()
-
-    def __call__(
-        self,
-        *,
-        question: str,
-        context: str,
-        top_k: int = 1,
-    ) -> dict[str, Any] | list[dict[str, Any]]:
-        codificacion = self.tokenizer(
-            question,
-            context,
-            truncation="only_second",
-            max_length=512,
-            return_offsets_mapping=True,
-            return_tensors="pt",
-        )
-        ids_secuencia = codificacion.sequence_ids(0)
-        offsets = codificacion.pop("offset_mapping")[0]
-        entradas = {
-            clave: valor.to(self.dispositivo)
-            for clave, valor in codificacion.items()
-        }
-        with torch.no_grad():
-            salida = self.modelo(**entradas)
-        mascara_contexto = torch.tensor(
-            [identificador == 1 for identificador in ids_secuencia],
-            dtype=torch.bool,
-        )
-        logits_inicio = salida.start_logits[0].detach().cpu().masked_fill(
-            ~mascara_contexto, -1e9
-        )
-        logits_fin = salida.end_logits[0].detach().cpu().masked_fill(
-            ~mascara_contexto, -1e9
-        )
-        probabilidades_inicio = torch.softmax(logits_inicio, dim=-1)
-        probabilidades_fin = torch.softmax(logits_fin, dim=-1)
-        cantidad = min(12, int(mascara_contexto.sum().item()))
-        inicios = torch.topk(probabilidades_inicio, cantidad).indices.tolist()
-        finales = torch.topk(probabilidades_fin, cantidad).indices.tolist()
-        candidatos = []
-        for inicio_token in inicios:
-            for fin_token in finales:
-                longitud = fin_token - inicio_token + 1
-                if not 1 <= longitud <= 45:
-                    continue
-                inicio = int(offsets[inicio_token, 0])
-                fin = int(offsets[fin_token, 1])
-                if fin <= inicio:
-                    continue
-                candidatos.append({
-                    "answer": context[inicio:fin].strip(),
-                    "score": float(
-                        probabilidades_inicio[inicio_token]
-                        * probabilidades_fin[fin_token]
-                    ),
-                    "start": inicio,
-                    "end": fin,
-                })
-        candidatos.sort(key=lambda candidato: candidato["score"], reverse=True)
-        if not candidatos:
-            candidatos = [{"answer": "", "score": 0.0, "start": 0, "end": 0}]
-        seleccionados = candidatos[:top_k]
-        return seleccionados[0] if top_k == 1 else seleccionados
 
 
 def localizar_raiz() -> Path:
