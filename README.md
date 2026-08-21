@@ -9,8 +9,14 @@ trabajo conserva dos experimentos independientes:
 - el laboratorio obligatorio, sobre un único PDF de 62 páginas;
 - una extensión posterior RAG multidocumento, sobre nueve PDF y 199 páginas.
 
-El notebook canónico y ejecutado es [`LaboratorioML.ipynb`](LaboratorioML.ipynb).
-`laboratorio_ml_qa.ipynb` se conserva únicamente como antecedente histórico.
+Los notebooks tienen responsabilidades distintas:
+
+- [`LaboratorioML.ipynb`](LaboratorioML.ipynb) es el notebook completo,
+  canónico y la evidencia oficial de los experimentos;
+- [`RAG_UES_Demo.ipynb`](RAG_UES_Demo.ipynb) es el notebook auxiliar limpio
+  para explicación y defensa del pipeline final;
+- [`laboratorio_ml_qa.ipynb`](laboratorio_ml_qa.ipynb) se conserva únicamente
+  como antecedente histórico.
 
 ## Objetivo
 
@@ -44,6 +50,7 @@ extractiva: el sistema no genera texto libre.
 ```text
 .
 ├── LaboratorioML.ipynb              # notebook canónico (273 celdas)
+├── RAG_UES_Demo.ipynb                # demostración breve para la defensa
 ├── laboratorio_ml_qa.ipynb          # antecedente histórico
 ├── data/
 │   ├── documento_fuente.pdf          # única fuente de la parte obligatoria
