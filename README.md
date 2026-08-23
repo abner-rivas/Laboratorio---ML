@@ -11,12 +11,10 @@ trabajo conserva dos experimentos independientes:
 
 Los notebooks tienen responsabilidades distintas:
 
-- [`LaboratorioML.ipynb`](LaboratorioML.ipynb) es el notebook completo,
+- [`laboratorio_ml_qa.ipynb`](laboratorio_ml_qa.ipynb) es el notebook completo,
   canónico y la evidencia oficial de los experimentos;
 - [`RAG_UES_Demo.ipynb`](RAG_UES_Demo.ipynb) es el notebook auxiliar limpio
   para explicación y defensa del pipeline final;
-- [`laboratorio_ml_qa.ipynb`](laboratorio_ml_qa.ipynb) se conserva únicamente
-  como antecedente histórico.
 
 ## Objetivo
 
@@ -30,15 +28,15 @@ el código de apoyo y la fuente documental.
 La parte obligatoria no incorpora el corpus complementario:
 
 ```text
-documento_fuente.pdf → extracción → chunks → embeddings MPNet
-                      → FAISS Top-10 → BETO-SQAC → evaluación
+documento_fuente.pdf → extracción → chunks → embeddings MiniLM
+                      → FAISS Top-3 → BETO-SQAC → evaluación
 ```
 
 La extensión mantiene cada PDF por separado y añade procedencia:
 
 ```text
 pregunta → recuperación → documento → página → chunk
-         → BETO-SQAC → respuesta + fuente
+         → embeddings MPNet → FAISS Top-10 → BETO-SQAC → respuesta + fuente
 ```
 
 FAISS usa `IndexFlatIP` con vectores normalizados; en esas condiciones, el
@@ -49,9 +47,8 @@ extractiva: el sistema no genera texto libre.
 
 ```text
 .
-├── LaboratorioML.ipynb              # notebook canónico (273 celdas)
-├── RAG_UES_Demo.ipynb                # demostración breve para la defensa
-├── laboratorio_ml_qa.ipynb          # antecedente histórico
+├── RAG_UES_Demo.ipynb                # demostración final multidocumento
+├── laboratorio_ml_qa.ipynb          # notebook principal de experimentos
 ├── data/
 │   ├── documento_fuente.pdf          # única fuente de la parte obligatoria
 │   ├── preguntas_multidocumento.json
@@ -92,45 +89,25 @@ concatenarlos ni borrar su identidad. El total ejecutado es de 9 documentos,
 Los checkpoints se descargan desde Hugging Face al ejecutar las fases pesadas;
 no se almacenan pesos en el repositorio.
 
-## Configuración final
+## Configuración Evaluada
 
-| Componente | Valor |
-|---|---|
-| Chunk | 800 caracteres |
-| Overlap | 0 |
-| Top-K | 10 |
-| Índice | FAISS `IndexFlatIP` |
-| Dimensión MPNet | 768 |
-| QA | BETO-SQAC (MMG) |
+El proyecto se divide en dos fases con configuraciones distintas:
 
-## Resultados principales
+| Característica | Monodocumento (laboratorio_ml_qa.ipynb) | Multidocumento (RAG_UES_Demo.ipynb) |
+|---|---|---|
+| Documentos | 1 | 9 |
+| Páginas | 62 | 199 |
+| Chunks | 544 (óptimo 300 char) | 765 |
+| Embedding | MiniLM (384d) | MPNet (768d) |
+| Top-K | 3 | 10 |
+| QA | BETO-SQAC | BETO-SQAC |
 
-| Experimento monodocumento | Recall@10 | QA Accuracy |
-|---|---:|---:|
-| RAG MiniLM histórico | 40 % | 40 % |
-| RAG MPNet final | **60 %** | **60 % (6/10)** |
+## Hallazgos Principales (Experimentos Monodocumento)
 
-El QA exhaustivo y el RAG MiniLM obtuvieron ambos 40 %, pero el RAG redujo las
-inferencias QA de 2 170 a 100. El speedup temporal registrado no es una
-comparación aislada de arquitectura porque las fases usaron dispositivos
-distintos; la reducción de 95.4 % en inferencias sí es estructural.
-
-## RAG multidocumento
-
-| Métrica | Resultado |
-|---|---:|
-| Document Recall@10 | 93.75 % |
-| Chunk Recall@10 | 56.25 % |
-| MRR documento | 0.7833 |
-| MRR chunk | 0.31875 |
-| QA Accuracy respondibles | 25 % (4/16) |
-| QA Accuracy global | 22.22 % (4/18) |
-| Abstención correcta | 0 % (0/2) |
-
-El hallazgo central es la pérdida encadenada: identificar el documento no
-garantiza recuperar el fragmento exacto y recuperar evidencia no garantiza una
-extracción correcta. Estos valores se conservan sin cambiar preguntas,
-etiquetas ni respuestas.
+- **Modelo QA:** BETO-SQAC obtuvo la mayor cantidad de aciertos (18/20) y mayor score medio frente a variantes de BETO-SQuAD2.
+- **Tamaño de Chunk:** Fragmentos más pequeños (300 caracteres) superaron en exactitud (70%) a bloques mayores (800 caracteres), debido a que reducen el ruido contextual para el extractor.
+- **Overlap:** Incluir solapamiento redujo la precisión e incrementó los tiempos de inferencia significativamente al aumentar el número total de fragmentos en el índice.
+- **Top-K:** Al contrario de lo esperado teóricamente, aumentar la cantidad de fragmentos inyectados (Top-10) confundió al modelo QA, desplomando el Accuracy del 50% (Top-1) al 20%. Un valor de K=3 ofreció el mejor balance.
 
 ## Instalación
 
@@ -154,7 +131,7 @@ datos exactos conservados son los que registran el notebook y
 Abra el notebook desde la raíz para que las rutas relativas sean válidas:
 
 ```bash
-jupyter lab LaboratorioML.ipynb
+jupyter lab laboratorio_ml_qa.ipynb
 ```
 
 El notebook ya contiene todas las salidas finales. **Run All** descarga modelos
@@ -220,6 +197,6 @@ comparación controlada final de 45 inferencias que seleccionó BETO-SQAC está 
 - Josias Abner Rivas Fuentes
 - Elmer Edenilson Rosales Molina
 
-**Catedrático:** Vladimir Dias
+**Catedrático:** Bladimir Diaz Campos
 **Institución:** Universidad de El Salvador, Facultad de Ingeniería y
 Arquitectura, Escuela de Sistemas Informáticos.

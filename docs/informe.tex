@@ -67,8 +67,8 @@
   \begin{tabular}{rl}
     \textbf{Estudiantes:} & Josias Abner Rivas Fuentes\\
                           & Elmer Edenilson Rosales Molina\\[0.3cm]
-    \textbf{Catedrático:} & Vladimir Dias\\
-    \textbf{Fecha:}       & 14 de agosto de 2026
+    \textbf{Catedrático:} & Bladimir Diaz Campos\\
+    \textbf{Fecha:}       & 22 de agosto de 2026\\
   \end{tabular}
   \vfill
   \href{https://github.com/abner-rivas/Laboratorio---ML.git}
@@ -348,9 +348,9 @@ primera respuesta.
 
 \subsection{Preguntas cuya respuesta no está en el contexto}
 
-Ante «¿Quién inventó Internet?» el modelo devolvió tokens ajenos a una
-respuesta con score 0.000045; ante «¿Cuál es la capital de Francia?», el
-máximo fue 0.0040. El extractor siempre intenta seleccionar un span, por lo que
+Ante «¿Quién es el presidente de Estados Unidos?» el modelo devolvió tokens ajenos a una
+respuesta con score 0.0009183; ante «¿Cuál es el planeta más cercano al Sol?», el
+máximo fue 0.0065096. El extractor siempre intenta seleccionar un span, por lo que
 una pregunta sin evidencia requiere abstención o validación adicional.
 
 \section{Actividad de laboratorio: contexto propio}
@@ -469,9 +469,9 @@ sección 14.10.
 
 \subsection{Contexto de evaluación}
 
-La comparación controlada final usó tres contextos: introducción institucional
-de la UES, bases de datos/SGBD y un artículo sobre aprendizaje automático.
-Cada modelo respondió cinco preguntas por contexto, para 15 inferencias.
+La comparación final usó tres contextos: contexto propio sobre IA (10 preguntas),
+bases de datos/SGBD (5 preguntas) y un artículo de Wikipedia sobre aprendizaje automático (5 preguntas).
+Cada modelo respondió a estas preguntas, totalizando 20 inferencias por modelo.
 
 \subsection{Preguntas}
 
@@ -484,56 +484,57 @@ preguntas de bases de datos y Wikipedia se presentan en la sección 10.
 \begin{table}[!htbp]
 \centering
 \small
-\caption{Comparación controlada final: 15 preguntas por modelo.}
+\caption{Comparación final: 20 preguntas por modelo.}
 \begin{tabularx}{\linewidth}{@{}Yrrrr@{}}
 \toprule
 \textbf{Modelo} & \textbf{Correctas} & \textbf{Accuracy} & \textbf{Score medio} & \textbf{Tiempo medio (s)}\\
 \midrule
-BETO-SQuAD2 (mrm8488) & 13/15 & 86.67\,\% & 0.5412 & 0.1215\\
-BETO-SQuAD2 (MMG) & 13/15 & 86.67\,\% & 0.4249 & 0.1132\\
-BETO-SQAC (MMG) & 15/15 & 100.00\,\% & 0.6920 & 0.1154\\
+BETO-SQuAD2 (mrm8488) & 17/20 & 85.0\,\% & 0.5617 & 0.6695\\
+BETO-SQuAD2 (MMG) & 16/20 & 80.0\,\% & 0.4114 & 1.0243\\
+BETO-SQAC (MMG) & 18/20 & 90.0\,\% & 0.7681 & 0.8868\\
 \bottomrule
 \end{tabularx}
 \end{table}
 
 \subsection{Score}
 
-BETO-SQAC obtuvo el mayor score medio (0.6920), además del mayor número de
+BETO-SQAC obtuvo el mayor score medio (0.7681), además del mayor número de
 aciertos. El score no se usó por sí solo para seleccionar el modelo: se
 contrastó con respuestas esperadas y revisión de spans.
 
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=0.85\linewidth]{img/score_por_pregunta.png}
+\caption{Visualización del Score por cada pregunta evaluada.}
+\end{figure}
+
 \subsection{Tiempo de inferencia}
 
-Los promedios fueron cercanos, entre 0.1132 y 0.1215 s. Son mediciones de una
+Los promedios variaron entre 0.6695 y 1.0243 s. Son mediciones de una
 ejecución concreta y no un benchmark universal; otras tablas históricas se
 ejecutaron bajo condiciones distintas.
 
 \subsection{Ventajas y desventajas}
 
 BETO-SQAC presentó la mejor exactitud y confianza media, por lo que fue elegido
-como extractor final. BETO-SQuAD2 (MMG) fue ligeramente más rápido en este
-registro, pero falló dos casos; mrm8488 facilitó la fase introductoria y tuvo
-score intermedio, también con dos fallos.
+como extractor final. BETO-SQuAD2 (mrm8488) fue el más rápido en este
+registro y tuvo un acierto de 17/20; BETO-SQuAD2 (MMG) tuvo el score más bajo y el mayor tiempo.
 
 \subsection{Análisis comparativo}
 
 \begin{figure}[!htbp]
 \centering
-\includegraphics[width=.72\linewidth]{../results/graficos/comparacion_modelos.png}
-\caption{Comparación de modelos registrada en la fase histórica. La figura
-apoya la tendencia de score y tiempo; la decisión final usa la tabla
-controlada de 45 inferencias.}
+\includegraphics[width=.9\linewidth]{img/comparacion_modelos_y_tiempos.png}
+\caption{Comparación de modelos consolidada (Aciertos, Score medio y Tiempo medio).}
 \end{figure}
 
-\texttt{comparacion\_modelos.csv} conserva un benchmark histórico de 60
-inferencias (20 por modelo), mientras
-\texttt{resultados\_qa.csv} contiene la comparación controlada final de 45.
-Sus agregados no se mezclaron; el anexo 18.3 documenta ambos protocolos.
+\texttt{comparacion\_modelos.csv} conserva el benchmark de 60
+inferencias (20 por modelo), unificando los resultados de los tres contextos evaluados.
 
 \subsection{Conclusiones}
 
-BETO-SQAC (MMG) fue el modelo más adecuado para las preguntas controladas:
-15/15, score medio 0.6920 y tiempo semejante a los otros checkpoints. Por ello
+BETO-SQAC (MMG) fue el modelo más adecuado para las preguntas:
+18/20, score medio 0.7681 y buen tiempo de respuesta. Por ello
 se mantuvo fijo en los experimentos documentales posteriores.
 
 \section{Experimentos con diferentes contextos}
@@ -548,7 +549,7 @@ y del artículo de aprendizaje automático, sin inventar un corpus adicional.
 \subsection{Resultados}
 
 Sobre cinco preguntas de bases de datos, mrm8488 y BETO-SQuAD2 (MMG)
-respondieron 4/5, mientras BETO-SQAC respondió 5/5. Sus scores medios fueron
+respondieron 3/5, mientras BETO-SQAC respondió 4/5. Sus scores medios fueron
 0.4367, 0.3297 y 0.7785, respectivamente.
 
 \subsection{Artículo de Wikipedia}
@@ -569,22 +570,28 @@ aprendizaje por refuerzo.
 \begin{table}[!htbp]
 \centering
 \scriptsize
-\caption{Resultados controlados por contexto (cinco preguntas por celda).}
+\caption{Resultados controlados por contexto (10 en propio, 5 en otros).}
 \begin{tabularx}{\linewidth}{@{}Yrrr@{}}
 \toprule
 & \multicolumn{3}{c}{\textbf{Correctas / score medio}}\\
 \cmidrule(l){2-4}
-\textbf{Modelo} & \textbf{UES} & \textbf{Bases de datos} & \textbf{Wikipedia}\\
+\textbf{Modelo} & \textbf{Contexto propio} & \textbf{Bases de datos} & \textbf{Wikipedia}\\
 \midrule
-BETO-SQuAD2 (mrm8488) & 4/5 / 0.6400 & 4/5 / 0.4367 & 5/5 / 0.5469\\
-BETO-SQuAD2 (MMG) & 5/5 / 0.5369 & 4/5 / 0.3297 & 4/5 / 0.4082\\
-BETO-SQAC (MMG) & 5/5 / 0.6158 & 5/5 / 0.7785 & 5/5 / 0.6816\\
+BETO-SQuAD2 (mrm8488) & 9/10 / 0.6316 & 3/5 / 0.4367 & 5/5 / 0.5469\\
+BETO-SQuAD2 (MMG) & 9/10 / 0.4538 & 3/5 / 0.3297 & 4/5 / 0.4082\\
+BETO-SQAC (MMG) & 9/10 / 0.8062 & 4/5 / 0.7785 & 5/5 / 0.6816\\
 \bottomrule
 \end{tabularx}
 \end{table}
 
 El resultado por dominio confirma la mayor consistencia de BETO-SQAC. No se
-deduce superioridad general fuera de estos tres contextos y quince preguntas.
+deduce superioridad general fuera de estos tres contextos y veinte preguntas.
+
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=0.85\linewidth]{img/precision_modelo_y_contexto.png}
+\caption{Precisión alcanzada por cada modelo según el contexto evaluado.}
+\end{figure}
 
 \section{Question Answering sobre documentos extensos}
 
@@ -602,9 +609,9 @@ conservó identificador, texto y páginas de inicio/fin.
 
 \subsection{Tamaño de fragmentos}
 
-Se evaluaron 300, 500 y 800 caracteres, con y sin overlap cuando existía un
-registro real. Los tamaños produjeron entre 217 y 694 chunks. La comparación
-completa se presenta en las secciones 12 y 15.
+Se evaluó una longitud de 500 caracteres, comparando la fragmentación pura
+frente al uso de un solapamiento (overlap) de 150 caracteres. Las configuraciones
+produjeron 347 y 496 chunks, respectivamente. La comparación se presenta en la sección 12.
 
 \subsection{Implementación}
 
@@ -621,57 +628,58 @@ irrelevante.
 
 \subsection{Análisis de resultados}
 
-Sin recuperación semántica, 300/0 y 500/0 obtuvieron 3/10; 800/0 obtuvo 4/10.
-El score medio alto (0.9172--0.9428) coexistió con baja exactitud, señal de que
-comparar scores entre numerosos chunks favorece falsos positivos. La
-configuración 800/0 redujo el barrido a 217 chunks y se conservó para el RAG.
+Sin recuperación semántica, la configuración 500/0 obtuvo 3/10 respuestas correctas,
+mientras que 500/150 obtuvo 4/10. El score promedio alto (0.9171--0.9443) coexistió con
+baja exactitud, señal de que comparar scores entre numerosos chunks favorece falsos positivos.
 
 \section{Evaluación del overlap}
 
-\subsection{Chunking sin overlap}
+\subsection{Configuraciones evaluadas}
 
-Las configuraciones 300/0, 500/0 y 800/0 produjeron 579, 347 y 217 chunks, con
-3/10, 3/10 y 4/10 respuestas correctas.
-
-\subsection{Chunking con overlap}
-
-Se probaron 300/50, 500/100 y 800/150. Generaron 694, 434 y 267 chunks,
-respectivamente, y las tres alcanzaron 4/10.
+Se midió el rendimiento empleando bloques de 500 caracteres sin overlap y con
+un overlap de 150 caracteres. La primera generó 347 fragmentos, mientras que
+el traslape elevó el total a 496 fragmentos (un incremento aproximado del 42.9\,\%).
 
 \subsection{Resultados}
 
-La tabla siguiente reúne los seis registros y permite comparar aciertos,
+La tabla siguiente reúne las dos configuraciones implementadas y permite comparar aciertos,
 volumen de fragmentos y tiempo total.
 
 \begin{table}[!htbp]
 \centering
 \small
-\caption{Seis configuraciones reales de chunking y overlap.}
+\caption{Comparación directa de chunking con y sin overlap.}
 \begin{tabular}{@{}rrrrr@{}}
 \toprule
 \textbf{Chunk} & \textbf{Overlap} & \textbf{Chunks} & \textbf{Correctas} & \textbf{Tiempo total (s)}\\
 \midrule
-300 & 0   & 579 & 3/10 & 288.147\\
-300 & 50  & 694 & 4/10 & 350.798\\
-500 & 0   & 347 & 3/10 & 223.805\\
-500 & 100 & 434 & 4/10 & 325.274\\
-800 & 0   & 217 & 4/10 & 236.143\\
-800 & 150 & 267 & 4/10 & 282.039\\
+500 & 0   & 347 & 3/10 & 527.357\\
+500 & 150 & 496 & 4/10 & 747.880\\
 \bottomrule
 \end{tabular}
 \end{table}
 
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=0.75\linewidth]{img/comparativo_solapamiento.png}
+\caption{Comparativo directo de Accuracy y Tiempos: sin solapamiento (500/0) vs con solapamiento (500/150).}
+\label{fig:comparativo_solapamiento}
+\end{figure}
+
 \subsection{Comparación}
 
-El overlap elevó el acierto de 3/10 a 4/10 para tamaños 300 y 500, pero no
-mejoró 800. En todos los pares aumentó número de chunks y tiempo. Los tiempos
-describen esas ejecuciones y no aíslan todos los factores de hardware.
+El overlap elevó el acierto neto de 3/10 a 4/10. Sin embargo, el tiempo total de
+inferencia se incrementó drásticamente (un 41.8\,\%) debido al mayor volumen
+de fragmentos. En este experimento, la mejora de cobertura no es gratuita y se
+paga con una mayor latencia total.
 
 \subsection{Conclusiones}
 
-El overlap ayudó cuando protegió evidencia cercana a cortes, pero su beneficio
-no fue consistente. Se eligió 800/0 porque igualó el máximo observado con
-menos chunks, sin afirmar que overlap cero sea óptimo para cualquier corpus.
+El overlap ayudó cuando protegió evidencia cercana a los cortes, mejorando
+el score global. Sin embargo, no garantizó una mejora uniforme, persistiendo
+casos de falsa confianza. Posteriormente, para la implementación del sistema RAG,
+se procedió a utilizar chunks de 800 caracteres para aprovechar mejor los embeddings
+y abarcar más contexto por fragmento.
 
 \section{Sistema RAG}
 
@@ -690,10 +698,10 @@ una fase de consulta, ejecutada por pregunta. La figura
 PDF $\rightarrow$ extracción de texto $\rightarrow$ limpieza
 $\rightarrow$ chunks + metadata\\
 $\downarrow$\\[-1mm]
-MPNet $\rightarrow$ embeddings de 768 dimensiones
+MiniLM $\rightarrow$ embeddings de 384 dimensiones
 $\rightarrow$ normalización L2 $\rightarrow$ FAISS \texttt{IndexFlatIP}\\[3mm]
 \textbf{FASE B --- CONSULTA}\\[2mm]
-Pregunta $\rightarrow$ MPNet $\rightarrow$ embedding de la pregunta
+Pregunta $\rightarrow$ MiniLM $\rightarrow$ embedding de la pregunta
 $\rightarrow$ FAISS\\
 $\downarrow$\\[-1mm]
 similitud semántica $\rightarrow$ Top-K chunks
@@ -713,10 +721,7 @@ el producto interno tenga interpretación de similitud coseno.
 
 \subsection{Modelo de embeddings}
 
-La configuración final usa MPNet multilingüe de Sentence Transformers, con 768
-dimensiones \cite{mpnetmodel}. Su identificador completo aparece en la tabla
-\ref{tab:config-final}. MiniLM de 384 dimensiones se conserva solo como
-alternativa experimental en la sección 15.1.
+La configuración base usa el modelo \texttt{paraphrase-multilingual-MiniLM-L12-v2} de Sentence Transformers, que proyecta el texto en 384 dimensiones. Adicionalmente, se probó de manera experimental un modelo alternativo en español (\texttt{sentence\_similarity\_spanish\_es}).
 
 \subsection{Construcción de la base vectorial}
 
@@ -740,23 +745,20 @@ respuesta incorrecta.
 
 \subsection{Recuperación Top-K}
 
-Se evaluaron $K=1,3,5,10$ con MiniLM. Recall@K y QA Accuracy pasaron de 10\,\%
-en Top-1 a 40\,\% en Top-10; el tiempo total pasó de 0.189 a 1.408 s para diez
-preguntas. Top-10 se eligió por la mayor cobertura observada.
-
-\begin{figure}[!htbp]
-\centering
-\includegraphics[width=.67\linewidth]{../results/graficos/accuracy_topk.png}
-\caption{Efecto de Top-K en la exactitud del RAG histórico con MiniLM.}
-\end{figure}
+Se evaluaron $K=1,3,5,10$ con el modelo MiniLM en la configuración 500/150.
+Se observó que el Accuracy disminuyó a medida que aumentaba K (pasando de
+50\,\% en Top-1 a 20\,\% en Top-10). Para las corridas generales del asistente
+RAG se fijó el valor de $K=3$ buscando un equilibrio razonable entre latencia
+y calidad de los fragmentos recuperados.
 
 \subsection{Question Answering sobre fragmentos recuperados}
 
-BETO-SQAC recibe únicamente los diez chunks recuperados, extrae un candidato
+BETO-SQAC recibe únicamente los $K$ chunks recuperados por FAISS, extrae un candidato
 por fragmento y selecciona el mayor score QA. La ejecución validada ofrece un
-ejemplo: para la periodicidad del Consejo Académico devolvió «una vez al
-mes», con score QA 0.983679 y similitud 0.639237. Los dos números proceden de
-etapas distintas.
+ejemplo: para la periodicidad del Consejo Académico (donde la respuesta correcta
+era «una vez al mes»), el modelo falló devolviendo un string cortado,
+pero sirve para ilustrar que el \textit{Score QA} y el \textit{Score de Similitud}
+son métricas matemáticamente independientes generadas en etapas distintas.
 
 \subsection{Extensión multidocumento}
 
@@ -835,31 +837,29 @@ y páginas. El proyecto construyó un asistente que recibe una pregunta, reduce
 el espacio de búsqueda a fragmentos pertinentes y entrega una respuesta
 extractiva acompañada de fuente.
 
-\subsection{Documento seleccionado}
+\subsection{Documentos y experimentación}
 
-El caso base utilizó el \textit{Reglamento de la Gestión
-Académico-Administrativa de la Universidad de El Salvador}
-\cite{uesreglamento}, conservado como \texttt{documento\_fuente.pdf}: 62
-páginas y 217 chunks. La extensión de la sección 13.9 añadió ocho reglamentos
-individuales, para un total de 9 documentos, 199 páginas y 765 chunks.
+El desarrollo base de RAG monodocumento utilizó \texttt{doc\_ues\_asistente.pdf}
+(el cual consolida normativas en 435,000 caracteres). Por otro lado, la demostración 
+final multidocumento (\texttt{RAG\_UES\_Demo.ipynb}) cargó nueve reglamentos individuales, totalizando 199 páginas y 765 chunks.
 
 \subsection{Arquitectura del sistema}
 
 Se aplicaron las dos fases de la figura \ref{fig:arquitectura-rag}. La
-indexación prepara corpus y metadata; la consulta encadena MPNet, FAISS,
-Top-10 y BETO-SQAC. No se añadió generación de texto.
+indexación prepara corpus y metadata; la consulta encadena el modelo de embeddings, FAISS,
+Top-K y BETO-SQAC. No se añadió generación de texto.
 
 \subsection{Procesamiento del documento}
 
-PyMuPDF extrajo texto de las 62 páginas sin OCR. La limpieza normalizó espacios
-y preservó saltos útiles. Se fragmentó por caracteres con tamaño 800 y overlap
-0, registrando página y posición de cada chunk.
+PyMuPDF extrajo texto de los PDFs sin OCR. La limpieza normalizó espacios
+y preservó saltos útiles. Se fragmentó por caracteres con tamaño base 800 y overlap
+0, registrando página y posición de cada chunk (aunque luego se experimentó con 500/150).
 
 \subsection{Embeddings}
 
-MPNet produjo una matriz de $217\times768$ en el caso base. Como se explicó en
-la sección 13.2, tanto chunks como preguntas se normalizaron antes de la
-búsqueda.
+Para la experimentación monodocumento se usó principalmente \texttt{MiniLM} (384 dimensiones). 
+Sin embargo, para la demostración multidocumento definitiva, se empleó \texttt{MPNet multilingüe}
+produciendo una matriz de $765\times768$.
 
 \subsection{FAISS}
 
@@ -867,47 +867,36 @@ La matriz se añadió a \texttt{IndexFlatIP}. Cada índice entero se mantuvo
 alineado con su metadata, por lo que la respuesta puede citar el origen sin
 buscar nuevamente en el PDF.
 
-\subsection{Recuperación semántica}
+\subsection{QA y Recuperación semántica}
 
-La pregunta se codifica y FAISS devuelve diez chunks con sus similitudes. El
-Recall@10 monodocumento indica en qué proporción de diez preguntas la evidencia
-esperada apareció entre esos diez candidatos.
+BETO-SQAC evalúa los fragmentos recuperados y selecciona el span con mayor
+score QA. La exactitud final depende de que FAISS recupere correctamente 
+la evidencia (Recall) y de que BETO extraiga la respuesta correcta.
 
-\subsection{QA}
-
-BETO-SQAC evalúa los diez fragmentos recuperados y selecciona el span con mayor
-score QA. La Accuracy mide respuestas finalmente correctas, no cobertura del
-recuperador. Esta distinción explica por qué ambas métricas deben registrarse.
-
-\subsection{Preguntas de prueba}
-
-Se usaron diez preguntas con evidencia validada: tres fáciles, cuatro
-intermedias, dos difíciles y una diseñada para un límite de fragmento. Trataron
-periodicidad, cambio de carrera, calidad de egresado, unidades administrativas,
-pruebas de ingreso, asesoría por CUM, nombramientos y vigencia. El anexo 18.2
-lista las diez.
-
-\subsection{Resultados}
+\subsection{Resultados monodocumento}
 
 \begin{table}[!htbp]
 \centering
 \small
-\caption{Configuración y resultado monodocumento final.}
+\caption{Configuración base monodocumento evaluada en el código.}
 \label{tab:config-final}
 \begin{tabularx}{\linewidth}{@{}lY@{}}
 \toprule
 \textbf{Componente} & \textbf{Configuración / resultado}\\
 \midrule
 QA & \texttt{MMG/bert-base-spanish-wwm-cased-finetuned-sqac}\\
-Embeddings & \texttt{paraphrase-multilingual-mpnet-base-v2}; 768 dimensiones\\
-Fragmentación & 800 caracteres; overlap 0; 217 chunks\\
-Recuperación & FAISS \texttt{IndexFlatIP}; Top-K 10\\
-Evaluación & Recall@10 = 60\,\%; QA Accuracy = 60\,\% (6/10)\\
+Embeddings & \texttt{paraphrase-multilingual-MiniLM-L12-v2} (384 dimensiones)\\
+Fragmentación & 800 caracteres; overlap 0; 544 chunks\\
+Recuperación & FAISS \texttt{IndexFlatIP}; Top-K 3\\
+Evaluación & QA Accuracy = 40\,\% (4/10)\\
 \bottomrule
 \end{tabularx}
 \end{table}
 
-Recall@10 = 60\,\% significa que la evidencia esperada apareció entre los diez
+En la experimentación monodocumento, al utilizar MiniLM con $K=3$ y chunks 
+de 800/0, el Accuracy obtenido fue del 40\,\% (la calidad caía al aumentar a $K=10$). 
+La calidad mejoró sustancialmente (70\,\%) sólo cuando se probó un modelo en 
+español distinto con chunks de 500/150.
 recuperados para 6 de 10 preguntas. QA Accuracy = 60\,\% significa que la
 respuesta final fue aceptada en 6 de 10. El conjunto es pequeño, de modo que
 los valores describen esta prueba y no una tasa general de uso.
@@ -925,116 +914,64 @@ sucesivas, no equivalentes.
 El conjunto monodocumento contiene solo diez preguntas y el multidocumento,
 dieciocho. No se calibró un umbral de abstención: las dos preguntas sin
 respuesta produjeron spans. La fragmentación por caracteres puede separar
-unidades semánticas y el índice exacto no aplica reranking especializado. Los
-tiempos proceden de ejecuciones concretas y algunas fases usaron dispositivos
-distintos.
-
-\subsection{Mejoras propuestas}
-
-Las mejoras directamente motivadas por los errores son: recuperar mejor el
-chunk exacto una vez localizado el documento, calibrar abstención con ejemplos
-sin respuesta y evaluar reranking antes de QA. Deben medirse con un conjunto
-mayor y mantenido fijo, sin asumir de antemano que elevarán la exactitud.
+unidades semánticas y el índice exacto no aplica reranking especializado.
 
 \section{Experimentos adicionales}
 
 \subsection{Modelo de embeddings alternativo}
 
-Se comparó MiniLM multilingüe (384 dimensiones) con MPNet multilingüe (768).
-Con 800/0 y Top-10, MiniLM obtuvo Recall y Accuracy de 40\,\%; MPNet alcanzó
-60\,\% en ambas. La generación de embeddings pasó de 0.536 a 1.642 s; el
-tiempo de consulta fue cercano (1.432 frente a 1.420 s).
-
-\begin{figure}[!htbp]
-\centering
-\includegraphics[width=.67\linewidth]{../results/graficos/comparacion_embeddings_recall.png}
-\caption{Recall@10 registrado para MiniLM y MPNet.}
-\end{figure}
+Se comparó \texttt{MiniLM} multilingüe (384 dimensiones) con un modelo alternativo en español (\texttt{sentence\_similarity\_spanish\_es}). Evaluando con fragmentos de 500/150 y $K=3$, MiniLM obtuvo un Accuracy de 40\,\%, mientras que el modelo especializado en español alcanzó un 70\,\%. No obstante, la generación de embeddings con el modelo en español fue sustancialmente más lenta (194 s frente a 58 s de MiniLM para la misma base).
 
 \subsection{Tamaño de chunk: 300, 500 y 800}
 
-Sin overlap, 300 y 500 caracteres obtuvieron 3/10, mientras 800 obtuvo 4/10.
-También redujo el número de chunks de 579 y 347 a 217. La selección de 800 se
-basó en el mejor resultado observado con menor base, no en una regla universal.
+Se varió el tamaño de fragmento sin solapamiento usando MiniLM ($K=3$). Se observó una degradación de la exactitud a medida que el fragmento se hacía más grande: los chunks de 300 caracteres lograron un 70\,\% de Accuracy, los de 500 un 50\,\%, y los de 800 un 40\,\%. Los fragmentos pequeños redujeron el ruido del contexto extra, favoreciendo la extracción.
 
 \subsection{Diferentes valores de overlap}
 
-Se evaluaron los pares reales 300/0--300/50, 500/0--500/100 y
-800/0--800/150. El overlap mejoró un acierto en los dos primeros tamaños y no
-cambió el tercero; siempre aumentó chunks y tiempo. Por eso la configuración
-final mantuvo overlap 0.
+Se evaluaron los pares 300/0 frente a 300/50, 500/0 frente a 500/150, y 800/0 frente a 800/200. En todos los casos, añadir solapamiento disminuyó el Accuracy (por ejemplo, 300/0 bajó de 70\,\% a 60\,\% con overlap, y 500/0 bajó de 50\,\% a 40\,\%). El solapamiento generó hasta el doble de fragmentos (1740 para 300/50), aumentando el ruido vectorial y diluyendo la evidencia.
 
-\subsection{Diferentes valores de \texorpdfstring{$k$}{k}}
+\subsection{Diferentes valores de \texorpdfstring{$K$}{k}}
 
 \begin{table}[!htbp]
 \centering
 \small
-\caption{Top-K con MiniLM, 800/0 y diez preguntas.}
-\begin{tabular}{@{}rrrrr@{}}
+\caption{Top-K con MiniLM, 500/150 y diez preguntas.}
+\begin{tabular}{@{}rr@{}}
 \toprule
-\textbf{K} & \textbf{Recall@K} & \textbf{Accuracy} & \textbf{Score QA medio} & \textbf{Tiempo total (s)}\\
+\textbf{K} & \textbf{Accuracy} \\
 \midrule
-1 & 10\,\% & 10\,\% & 0.2694 & 0.189\\
-3 & 30\,\% & 30\,\% & 0.6407 & 0.508\\
-5 & 30\,\% & 30\,\% & 0.7027 & 0.721\\
-10 & 40\,\% & 40\,\% & 0.8364 & 1.408\\
+1 & 50\,\% \\
+3 & 40\,\% \\
+5 & 30\,\% \\
+10 & 20\,\% \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-Top-10 ofreció la mayor cobertura del experimento, con mayor coste que Top-1.
-Después se mantuvo fijo al comparar embeddings.
+A diferencia de lo esperado teóricamente, incrementar $K$ perjudicó severamente el rendimiento final de BETO. Al inyectar 10 fragmentos, el modelo tendió a extraer respuestas erróneas de chunks semánticamente cercanos, desplomando el Accuracy del 50\,\% al 20\,\%.
 
-\subsection{Impacto del tamaño de la base vectorial}
-
-\begin{table}[!htbp]
+\begin{figure}[!htbp]
 \centering
-\small
-\caption{Tamaño de base con MPNet, 800/0 y Top-10.}
-\begin{tabular}{@{}rrrr@{}}
-\toprule
-\textbf{Vectores} & \textbf{Recall@10} & \textbf{Accuracy} & \textbf{Tiempo total (s)}\\
-\midrule
-50  & 70\,\% & 50\,\% & 1.408\\
-100 & 70\,\% & 60\,\% & 1.410\\
-150 & 60\,\% & 60\,\% & 1.403\\
-217 & 60\,\% & 60\,\% & 1.412\\
-\bottomrule
-\end{tabular}
-\end{table}
+\includegraphics[width=0.9\linewidth]{img/resultados_experimentos_adicionales.png}
+\caption{Resumen gráfico de los experimentos adicionales (Modelos, K, Chunk Size y Tiempos).}
+\label{fig:experimentos_adicionales}
+\end{figure}
 
-Al agregar distractores, Recall descendió de 70\,\% a 60\,\%, mientras el
-tiempo permaneció cercano con Top-10 fijo. Las bases pequeñas fueron
-construcciones controladas que preservaron evidencia, por lo que el resultado
-describe el efecto de distractores en este conjunto.
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=0.85\linewidth]{img/tiempo_busqueda_vs_base.png}
+\caption{Impacto del tamaño de la base vectorial (número de fragmentos) en el tiempo de búsqueda.}
+\end{figure}
 
 \section{Conclusiones}
 
 \begin{enumerate}
-  \item \textbf{Resultados principales.} El flujo monodocumento final obtuvo
-  Recall@10 y QA Accuracy de 60\,\% (6/10). En multidocumento, Document
-  Recall@10 fue 93.75\,\%, Chunk Recall@10 56.25\,\% y QA Accuracy
-  respondible 25\,\% (4/16); las dos abstenciones fallaron.
-  \item \textbf{Modelo QA más adecuado.} BETO-SQAC (MMG) logró 15/15 en la
-  comparación controlada, frente a 13/15 de cada BETO-SQuAD2, con tiempo medio
-  semejante; por ello fue el extractor final.
-  \item \textbf{Efecto del chunking.} Entre los tamaños sin overlap, 800
-  caracteres alcanzó 4/10 con solo 217 chunks, frente a 3/10 con 300 y 500.
-  \item \textbf{Efecto del overlap.} El solapamiento ayudó en dos pares, pero
-  no mejoró 800/0 y siempre elevó volumen y tiempo; el resultado no respalda
-  asumir que más overlap siempre es mejor.
-  \item \textbf{Efectividad de la búsqueda semántica.} Top-10 amplió la
-  cobertura histórica de MiniLM a 40\,\%, y MPNet la elevó a 60\,\% en el caso
-  base. En múltiples documentos localizó con frecuencia la fuente correcta,
-  pero no siempre el chunk exacto.
-  \item \textbf{Ventajas de RAG.} La recuperación evita evaluar todo el
-  documento por consulta, permite escalar a varias fuentes y conserva
-  documento, página y chunk para sustentar la respuesta.
-  \item \textbf{Limitaciones.} Documento correcto no implica evidencia
-  correcta, ni evidencia correcta implica respuesta correcta. La brecha entre
-  93.75\,\%, 56.25\,\% y 25\,\% identifica pérdidas sucesivas; además, 0/2
-  abstenciones correctas evidencia la necesidad de calibrar preguntas sin
-  respuesta.
+  \item \textbf{Resultados principales.} El flujo base obtuvo un Accuracy del 40\,\%, pero pudo ser mejorado hasta un 70\,\% al optimizar el tamaño de chunk o al usar un modelo de embeddings en español.
+  \item \textbf{Modelo QA más adecuado.} BETO-SQAC (MMG) logró 18/20 en la comparación controlada inicial, siendo superior a BETO-SQuAD2, justificando su elección como extractor final.
+  \item \textbf{Efecto del chunking.} Los fragmentos más reducidos (300 caracteres) favorecieron enormemente al extractor al limpiar el ruido circundante, duplicando prácticamente el rendimiento respecto a chunks de 800 caracteres.
+  \item \textbf{Efecto del overlap.} El solapamiento fue contraproducente en todas las métricas evaluadas, al inflar el número total de chunks y provocar falsos positivos en el índice vectorial.
+  \item \textbf{Efecto de Top-K.} Subir el número de candidatos recuperados perjudicó a BETO, demostrando que en el contexto legal universitario, proporcionar más texto irrelevante confunde gravemente al extractor.
+  \item \textbf{Modelo de Embeddings.} Un modelo especializado en español mejora la similitud semántica y el Accuracy final, a cambio de triplicar el tiempo de indexación.
 \end{enumerate}
 
 \addcontentsline{toc}{section}{17. Referencias bibliográficas}
@@ -1173,24 +1110,19 @@ seleccionar el modelo.
 \midrule
 Documentos & 1 & 9\\
 Páginas & 62 & 199\\
-Chunks & 217 & 765\\
-Embedding & MPNet & MPNet\\
-Dimensión & 768 & 768\\
-Top-K & 10 & 10\\
+Chunks & 544 & 765\\
+Embedding & MiniLM & MPNet\\
+Dimensión & 384 & 768\\
+Top-K & 3 & 10\\
 QA & BETO-SQAC & BETO-SQAC\\
 \bottomrule
 \end{tabular}
 \end{table}
 
-El Recall@10 monodocumento verifica la presencia de la evidencia esperada
-entre chunks del único documento. Document Recall@10 multidocumento verifica
-si aparece el documento esperado. No son métricas intercambiables; por eso la
-extensión reporta además Chunk Recall@10.
-
 \subsection{Evidencia y repositorio}
 
-El notebook canónico es \path{LaboratorioML.ipynb}; la demostración ejecutada
-del flujo final es \path{RAG_UES_Demo.ipynb}. Los resultados estructurados
+El notebook canónico es \path{laboratorio_ml_qa.ipynb}; la demostración ejecutada
+del flujo final multidocumento es \path{RAG_UES_Demo.ipynb}. Los resultados estructurados
 se encuentran en \texttt{results/}, y el código de apoyo en \texttt{src/}. El
 repositorio está disponible en:
 \url{https://github.com/abner-rivas/Laboratorio---ML.git}.
